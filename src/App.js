@@ -7,14 +7,14 @@ import "./App.css";
 
 
 
-
 class App extends Component {
   state = {
     posts: [],
   };
 
   async componentDidMount() {
-    const { data: posts } = await http.get(config.apiEndpoint);
+    const api = config.apiEndPoint;
+    const { data: posts } = await http.get(api);
     this.setState({ posts });
   }
 
@@ -43,7 +43,7 @@ class App extends Component {
     const posts = this.state.posts.filter((p) => p.id !== post.id);
     this.setState({ posts });
     try {
-      await http.delete(`${config.apiEndpoint}/798798498`);
+      await http.delete(`${config.apiEndpoint}/${post.id}`);
       // await http.delete(`${config.apiEndpoint}/${post.id}`);
       // throw new Error('');
     } catch (ex) {
